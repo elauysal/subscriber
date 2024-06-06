@@ -1,39 +1,39 @@
 # SWA Developer Prototype Application
 
-Bu proje, Spring Boot kullanarak oluşturulmuş bir örnek uygulamadır. Uygulama, PostgreSQL veritabanı ve JSON dosyasından veri okuyarak çalışır. Hem REST hem de SOAP web servislerini içerir ve verileri in-memory cache üzerinde tutar.
+This project is an example application built using Spring Boot. The application works by reading data from a PostgreSQL database and a JSON file. It includes both REST and SOAP web services and stores data in an in-memory cache.
 
-## Özellikler
-- Lütfen postgres dbsi olusturun tablolar kendiliğinden oluşacaktır. proje update ile yapılmıştır.
-- JSON dosyasından veya PostgreSQL veritabanından veri okuma ve in-memory cache'e yükleme
-- GET, POST, PUT ve DELETE işlemleri için RESTful API
-- Tüm subscriber'ları ve belirli subscriber'ları SOAP web servisleri ile döndürme
-- Verileri belirli aralıklarla güncelleme
+## Features
+- Project created using Maven.
+- Reading data from a JSON file or PostgreSQL database and loading it into an in-memory cache.
+- RESTful API for GET, POST, PUT, and DELETE operations.
+- Returning all subscribers and specific subscribers through SOAP web services.
+- Periodic data updates.
 
-## Gereksinimler
+## Requirements
 
-- Java 8 veya üzeri
-- Maven 3.6.0 veya üzeri
-- PostgreSQL veritabanı
+- Java 8 or higher
+- Maven 3.6.0 or higher
+- PostgreSQL database
 
-## Kullanılan Teknolojiler
+## Technologies Used
 
 - Spring Boot
 - Spring Data JPA
 - Spring Web Services
 - JAXB
-- H2 Veritabanı (test için)
+- H2 Database (for testing)
 - Maven
 
-## Kurulum
+## Setup
 
-1. Projeyi klonlayın:
+1. Clone the project:
     ```bash
-    git clone https://github.com/kullaniciadi/swa-developer-prototype.git
-    cd swa-developer-prototype
+    git clone https://github.com/elauysal/subscriber.git
+    
     ```
 
-2. `application.properties` dosyasını ayarlayın:
-   `src/main/resources/application.properties` dosyasını açın ve PostgreSQL veritabanı ayarlarını yapın:
+2. Configure the `application.properties` file:
+   Open the `src/main/resources/application.properties` file and set up the PostgreSQL database settings:
     ```properties
     spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
     spring.datasource.username=postgres
@@ -41,35 +41,35 @@ Bu proje, Spring Boot kullanarak oluşturulmuş bir örnek uygulamadır. Uygulam
     spring.jpa.hibernate.ddl-auto=update
     ```
 
-3. Maven bağımlılıklarını indirin ve projeyi derleyin:
+3. Download Maven dependencies and build the project:
     ```bash
     mvn clean install
     ```
 
-4. Uygulamayı çalıştırın:
+4. Run the application:
     ```bash
     mvn spring-boot:run
     ```
 
-5. JSON dosyasından verileri yüklemek için uygulama başladığında `src/main/resources/data.json` dosyasını kontrol edin.
+5. Check the `src/main/resources/data.json` file to load data from the JSON file when the application starts.
 
-## API Kullanımı
+## API Usage
 
-### REST Servisleri
+### REST Services
 
-#### Tüm Subscriber'ları Getir
+#### Get All Subscribers
 - URL: `GET /api/subscribers/getAllSubscribers`
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/getAllSubscribers`
+- Example Usage: `http://localhost:8080/api/subscribers/getAllSubscribers`
 
-#### Aktif Subscriber'ları Getir
+#### Get Active Subscribers
 - URL: `GET /api/subscribers/getActiveSubscribers`
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/getActiveSubscribers`
+- Example Usage: `http://localhost:8080/api/subscribers/getActiveSubscribers`
 
-#### ID ile Subscriber Getir
+#### Get Subscriber by ID
 - URL: `GET /api/subscribers/getSubscriberById/{id}`
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/getSubscriberById/1`
+- Example Usage: `http://localhost:8080/api/subscribers/getSubscriberById/1`
 
-#### Yeni Subscriber Oluştur
+#### Create a New Subscriber
 - URL: `POST /api/subscribers/subscriber`
 - Body (JSON):
     ```json
@@ -80,9 +80,9 @@ Bu proje, Spring Boot kullanarak oluşturulmuş bir örnek uygulamadır. Uygulam
         "status": "ACTIVE"
     }
     ```
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/subscriber`
+- Example Usage: `http://localhost:8080/api/subscribers/subscriber`
 
-#### Subscriber Güncelle
+#### Update a Subscriber
 - URL: `PUT /api/subscribers/subscriber/{id}`
 - Body (JSON):
     ```json
@@ -93,17 +93,17 @@ Bu proje, Spring Boot kullanarak oluşturulmuş bir örnek uygulamadır. Uygulam
         "status": "ACTIVE"
     }
     ```
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/subscriber/4`
+- Example Usage: `http://localhost:8080/api/subscribers/subscriber/4`
 
-#### Subscriber Sil
+#### Delete a Subscriber
 - URL: `DELETE /api/subscribers/subscriber/{id}`
-- Örnek Kullanım: `http://localhost:8080/api/subscribers/subscriber/4`
+- Example Usage: `http://localhost:8080/api/subscribers/subscriber/4`
 
-### SOAP Servisleri
+### SOAP Services
 
-SOAP servislerine `http://localhost:8080/ws/subscribers.wsdl` adresinden erişebilirsiniz.
+You can access SOAP services at `http://localhost:8080/ws/subscribers.wsdl`.
 
-#### Tüm Subscriber'ları Getir
+#### Get All Subscribers
 - Request:
     ```xml
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sub="http://example.com/subscriber">
@@ -125,13 +125,13 @@ SOAP servislerine `http://localhost:8080/ws/subscribers.wsdl` adresinden erişeb
                 <sub:msisdn>905552551122</sub:msisdn>
                 <sub:status>ACTIVE</sub:status>
              </sub:subscriber>
-             <!-- Diğer subscriber'lar -->
+             <!-- Other subscribers -->
           </sub:getAllSubscribersResponse>
        </soapenv:Body>
     </soapenv:Envelope>
     ```
 
-#### Aktif Subscriber'ları Getir
+#### Get Active Subscribers
 - Request:
     ```xml
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sub="http://example.com/subscriber">
@@ -153,13 +153,13 @@ SOAP servislerine `http://localhost:8080/ws/subscribers.wsdl` adresinden erişeb
                 <sub:msisdn>905552551122</sub:msisdn>
                 <sub:status>ACTIVE</sub:status>
              </sub:subscriber>
-             <!-- Diğer aktif subscriber'lar -->
+             <!-- Other active subscribers -->
           </sub:getActiveSubscribersResponse>
        </soapenv:Body>
     </soapenv:Envelope>
     ```
 
-#### ID ile Subscriber Getir
+#### Get Subscriber by ID
 - Request:
     ```xml
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sub="http://example.com/subscriber">
@@ -188,6 +188,10 @@ SOAP servislerine `http://localhost:8080/ws/subscribers.wsdl` adresinden erişeb
     </soapenv:Envelope>
     ```
 
-## Loglama
+## Logging
 
-Tüm API çağrıları ve SOAP istekleri `app.log` dosyasına loglanır. Loglar şu formatta tutulur:
+All API calls and SOAP requests are logged to the `app.log` file. Logs are stored in the following format:
+```plaintext
+11.06.2021 10:19:44 /getAllSubscribers[GET]							
+11.06.2021 10:19:46 /getActiveSubscribers[GET]
+11.06.2021 10:22:47 /getSubscriberById[GET] id=2
