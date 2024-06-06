@@ -1,0 +1,44 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://example.com/subscriber" targetNamespace="http://example.com/subscriber" elementFormDefault="qualified">
+
+    <xs:element name="getAllSubscribersRequest" type="xs:string"/>
+    <xs:element name="getAllSubscribersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="subscriber" type="subscriber" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getActiveSubscribersRequest" type="xs:string"/>
+    <xs:element name="getActiveSubscribersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="subscriber" type="subscriber" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSubscriberByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getSubscriberByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="subscriber" type="subscriber"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="subscriber">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="msisdn" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

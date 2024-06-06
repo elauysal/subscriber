@@ -1,0 +1,8 @@
+{
+  "subscribers": [
+    {"id": "1", "name": "Stephan King", "msisdn": "905552551122", "status": "ACTIVE"},
+    {"id": "2", "name": "Alice Gracy", "msisdn": "905552551133", "status": "ACTIVE"},
+    {"id": "3", "name": "Glory Wisdom", "msisdn": "905552551144", "status": "DEACTIVED"},
+    {"id": "4", "name": "Mary Watson", "msisdn": "905552551166", "status": "SUSPENDED"}
+  ]
+}
